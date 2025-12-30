@@ -1,0 +1,28 @@
+
+name: "MultiEvent pipeline/Workflow"
+on:
+
+  push: # Event: whenever a push is made to the master / test branches
+    branches:
+      - master
+      - test
+
+      # trigger the workflow on push to master or production branches
+  pull_request: # Event: whenever a pull request is made to the master / test branches
+    branches:
+      - master
+      - test  
+jobs:
+    on-push-job:
+      if: github.event_name == 'push'  
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: "Running on Master/test for Push Event"
+          run: echo "Running on master/test push"
+    on-pull-request-job:
+      if: github.event_name == 'pull_request'
+      runs-on: ubuntu-latest
+      steps:
+          - name: "Running on Master/test for Pull Request Event"
+            run: echo "Running on master/test pull request" 
