@@ -12,6 +12,7 @@ on:
     branches:
       - master
       - test  
+  workflow_dispatch: # Event: manual trigger of the workflow
 jobs:
     on-push-job:
       if: github.event_name == 'push'  
@@ -26,3 +27,9 @@ jobs:
       steps:
           - name: "Running on Master/test for Pull Request Event"
             run: echo "Running on master/test pull request" 
+    on-workflow-dispatch-job:
+      if: github.event_name == 'workflow_dispatch'
+      runs-on: ubuntu-latest
+      steps:
+          - name: "Running on Manual Trigger for Workflow Dispatch Event"
+            run: echo "Running on manual trigger for workflow dispatch"
